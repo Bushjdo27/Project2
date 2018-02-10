@@ -12,8 +12,8 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      sortBy:'none',
-      category: '',
+      sortBy:'All',
+      category: 'All',
       isShowModal: false,
       typeModal:'',
       currentPost:{}
@@ -139,10 +139,6 @@ class App extends Component {
     
   }
 
-  handleRenderCategory = (e)=>{
-    const target = e.target;
-    console.log(target.name);
-  }
   render() {
     console.log(this.props);
     const PostsSort = this.renderHelperSort(this.props.Posts)
