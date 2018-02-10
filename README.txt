@@ -5,7 +5,10 @@ Step to run project :
 2 . 
 
 - terminal 1 :
-	- cd -> api-server : node server.js
+	- cd -> api-server : 
+		- npm install
+		- node server.js
 
 - terminal 2 :
+	- npm install
 	- cd -> frontend : npm start 
