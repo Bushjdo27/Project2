@@ -62,6 +62,10 @@ class AddPost extends Component{
         }
         
     }
+
+    backToHomePage = ()=>{
+        this.props.history.push("/")
+    }
     render(){
         const {title , body , author,category ,error} = this.state;    
         return (
@@ -69,7 +73,7 @@ class AddPost extends Component{
                 <Header inAddPost={true}/>
             <div className="Add-Post">
                 <h2 className="heading-2">Create Post</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore expedita possimus, hic dolor suscipit consectetur distinctio modi ducimus, praesentium beatae rem? Vitae eius necessitatibus officia ducimus, labore dolorum ratione accusamus.</p>
+               
                 
                 <form action="" onSubmit={this.handleSubmit} className="form">
                     <input type="text" placeholder="Title Post" name="Title" value={title} onChange={this.handleTitleChange}/>
@@ -82,10 +86,10 @@ class AddPost extends Component{
                     </select>
                     <textarea name="body" id="" cols="30" rows="10" placeholder="Body Post" value={body} onChange={this.handleBodyChange}>
                     </textarea>
-                    <button className="btn btn-submit" disabled = {error === 'Success'}>Create</button>
+                    {error !== 'Success' && <button className="btn btn-submit">Create</button>}
 
                 </form>
-                {error && <p className={error}>Add New Post {error} </p>}
+                {error && <p className={error} onClick={this.backToHomePage}>Add New Post {error} </p>}
                 
             </div>
             </div>

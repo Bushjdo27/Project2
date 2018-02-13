@@ -21,6 +21,7 @@ class Modal extends Component{
         }
     }
     componentDidMount(){
+        console.log(" compoentDidMount Modal called")
         if(this.props.typeModal === 'edit'){
             const {title , body , author,category ,id} = this.props.data;
             this.setState({title,body,author,category,id});
@@ -29,9 +30,18 @@ class Modal extends Component{
             const {body,author,id} = this.props.data;
             this.setState({id,author,body});
         }
-        
-
+        console.log(this.state)
     }
+    componentWillMount(){
+        console.log("componentWillMout Modal called");
+        console.log(this.state)
+    }
+
+    componentWillUnmount(){
+        console.log("componentWillUnmount Modal called ");
+        console.log(this.state)
+    }
+    
     handleTitleChange = (e)=>{
         const title = e.target.value;
         this.setState(()=>{
@@ -122,8 +132,6 @@ class Modal extends Component{
             return (
                 <div className="Add-Post Post-Edit">
                     <h2 className="heading-2">Edit Post</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore expedita possimus, hic dolor suscipit consectetur distinctio modi ducimus, praesentium beatae rem? Vitae eius necessitatibus officia ducimus, labore dolorum ratione accusamus.</p>
-                    
                     <form action="" onSubmit={this.handleEditPost} className="form">
                         <input type="text" placeholder="Title Post" name="Title" value={title} onChange={this.handleTitleChange}/>
                         <input type="text" placeholder="Author Name" name="AuthorName" value={author} onChange={this.handleAuthorChange}/>
@@ -135,7 +143,7 @@ class Modal extends Component{
                         </select>
                         <textarea name="body" id="" cols="30" rows="10" placeholder="Body Post" value={body} onChange={this.handleBodyChange}>
                         </textarea>
-                        <button className="btn btn-submit btn-edit" disabled = {error === 'Success'}>Edit {error && error}</button>
+                        {error !== 'Success' && <button className="btn btn-submit btn-edit">Edit Post</button>}
     
                     </form>
                     {error && <p className={error} onClick={toogleModal}>Edit Post {error} </p>}
@@ -152,7 +160,7 @@ class Modal extends Component{
                     <form action="" onSubmit={this.handleSubmitEditComment} className="form">
                         <textarea name="body" id="" cols="30" rows="10" placeholder="Body Post" value={body} onChange={this.handleBodyChange}>
                         </textarea>
-                        <button className="btn btn-submit btn-edit" disabled = {error === 'Success'}>Edit {error && error}</button>
+                        {error !== 'Success' && <button className="btn btn-submit btn-edit">Edit Comment</button>}
     
                     </form>
                     {error && <p className={error} onClick={toogleModal}>Edit Comment {error} </p>}
@@ -164,7 +172,7 @@ class Modal extends Component{
                 <div className="Add-Post Post-Edit">
                     <h2 className="heading-2">Delete Comment</h2>
                     <p>Are you sure !!!</p>
-                    <button onClick={this.handleDeleteComment} className="btn btn-submit btn-delete" disabled = {error === 'Success'}>Delete {error ? error : 'now'} !</button>
+                    {error !== 'Success' && <button onClick={this.handleDeleteComment} className="btn btn-submit btn-delete" disabled = {error === 'Success'}>Delete Comment now !</button>}
                     {error && <p className={error} onClick={toogleModal}>Delete comment {error} </p>}
                 </div>
             )
@@ -174,7 +182,7 @@ class Modal extends Component{
                 <div className="Add-Post Post-Edit">
                     <h2 className="heading-2">Delete Post</h2>
                     <p>Are you sure !!!</p>
-                    <button onClick={this.handlDeletePost} className="btn btn-submit btn-delete" disabled = {error === 'Success'}>Delete {error ? error : 'now'} !</button>
+                    {error !== 'Success' && <button onClick={this.handlDeletePost} className="btn btn-submit btn-delete" disabled = {error === 'Success'}>Delete Post !</button>}
                     {error && <p className={error} onClick={toogleModal}>Delete Post {error} </p>}
                 </div>
             )

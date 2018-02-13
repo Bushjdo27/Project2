@@ -12,7 +12,7 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      sortBy:'',
+      sortBy:'All',
       category: 'All',
       isShowModal: false,
       typeModal:'',
@@ -125,7 +125,6 @@ class App extends Component {
       }else{
         return Post.filter(post=>post.category === this.props.Category)
       }
-     
 
     }else{
       if(this.state.category === 'All'){
@@ -140,7 +139,7 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.props);
+    
     const PostsSort = this.renderHelperSort(this.props.Posts)
     const Posts = this.renderHelperCategory(PostsSort);
     return (

@@ -105,8 +105,12 @@ class DetailPost extends Component{
                 })
                 
             })
-        }else{
-            this.setState({error:'error'})
+        }else if(!author && body){
+            this.setState({error:'name'})
+        }else if(author && !body){
+            this.setState({error:'body'})
+        }else if(!author && !body){
+            this.setState({error:'name-body'})
         }
     }
 
@@ -260,9 +264,11 @@ class DetailPost extends Component{
 
                         <form action="" className="form-comment" onSubmit={this.handleAddComment}>
                             <input type="text" name="author" placeholder="Your Name" onChange={this.handleAuthorComment} value={this.state.authorComment}/>
-                            {this.state.error && <p style={{fontSize: '1.6rem' , color:'red', fontStyle:'italic'}}>Must enter author name</p>}
+                            {this.state.error === 'name' && <p style={{fontSize: '1.6rem' , color:'red', fontStyle:'italic',marginTop:'-3rem' , marginBottom:'2rem'}}>Must enter author name</p>}
                             <input type="text" name="body" id="" placeholder="Leave Comment here" onChange={this.handleBodyComment} value={this.state.bodyComment}/>
-                            {this.state.error && <p style={{fontSize: '1.6rem' , color:'red', fontStyle:'italic'}}>Must enter body comment</p>}
+                            {this.state.error ==='body' && <p style={{fontSize: '1.6rem' , color:'red', fontStyle:'italic',marginTop:'-3rem' , marginBottom:'2rem'}}>Must enter body comment</p>}
+
+                            {this.state.error ==='name-body' && <p style={{fontSize: '1.6rem' , color:'red', fontStyle:'italic',marginTop:'-3rem' , marginBottom:'2rem'}}>Must enter all field above</p>}
                             <button className="btn btn-submit btn-comment">Add Comment</button>
                         </form>
                     </div>
